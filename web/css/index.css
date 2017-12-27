@@ -1,0 +1,30 @@
+body {
+    padding-top: 5rem;
+}
+
+input {
+    font-family: 'Roboto Mono', monospace;
+}
+
+#container > .row {
+    padding-bottom: 3rem;
+}
+
+#stun-form {
+    padding-bottom: 2rem;
+}
+
+#turn-form .form-row {
+    padding-bottom: 1rem;
+}
+
+#ice-list .row {
+    padding-bottom: 1rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+
+#result-list > .row {
+    padding-bottom: 1rem;
+    font-family: 'Roboto Mono', monospace;
+}

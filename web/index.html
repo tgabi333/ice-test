@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="tgabi333">
+
+    <title>STUN and TURN server test page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <link href="/css/index.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="/">IceTest.Info</a>
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+-->
+</nav>
+
+<main role="main" class="container" id="container">
+
+    <div class="row">
+        <div class="col-12">
+            <h4>ICE server list</h4>
+            <div id="ice-list"></div>
+        </div>
+        <div class="col-12 text-right">
+            <button type="button" class="btn btn-lg btn-primary" id="start-test-button">START TEST</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h4>Results</h4>
+            <div id="result-list"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12" id="build-up-ice-server-list">
+            <h4>Build up ICE Server List</h4>
+            <form id="stun-form">
+                <div class="form-row align-items-center">
+                    <div class="col-sm-9">
+                        <div class="input-group mb-2 mb-sm-0">
+                            <div class="input-group-prepend"><span class="input-group-text">STUN</span></div>
+                            <input type="text" class="form-control" id="add-new-stun" aria-describedby="stun-help" placeholder="stun:localhost:3478">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-outline-primary btn-block">Add STUN</button>
+                    </div>
+                </div>
+                <small id="stun-help" class="form-text text-muted">STUN format is: stun:[...]?transport=...</small>
+            </form>
+
+            <form id="turn-form">
+                <div class="form-row align-items-center">
+                    <div class="col-sm-9">
+                        <div class="input-group mb-2 mb-sm-0">
+                            <div class="input-group-prepend"><span class="input-group-text">TURN</span></div>
+                            <input type="text" class="form-control" id="add-new-turn" aria-describedby="turn-help" placeholder="turn:localhost:3478" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 align-self-start">
+                        <button type="submit" class="btn btn-outline-primary btn-block">Add TURN</button>
+                    </div>
+                </div>
+                <div class="form-row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mb-sm-0">
+                            <div class="input-group-prepend"><span class="input-group-text">Username</span></div>
+                            <input type="text" class="form-control" id="add-new-turn-username" aria-describedby="turn-help" placeholder="demo" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group mb-2 mb-sm-0">
+                            <div class="input-group-prepend"><span class="input-group-text">Credential</span></div>
+                            <input type="text" class="form-control" id="add-new-turn-credential" aria-describedby="turn-help" placeholder="secret" required>
+                        </div>
+                    </div>
+
+                    <small id="turn-help" class="form-text text-muted">TURN format is: stun:[...]?transport=...</small>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<a href="https://github.com/tgabi333/ice-test"><img style="z-index: 1900; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+<script src="https://webrtc.github.io/adapter/adapter-6.0.3.js"></script>
+<script src="https://unpkg.com/eventemitter3@latest/umd/eventemitter3.min.js"></script>
+
+<script src="/js/class/turntest.js"></script>
+<script src="/js/class/resultview.js"></script>
+<script src="/js/turn-test.js"></script>
+<script src="/js/your-browser.js"></script>
+<script src="/js/ice-servers.js"></script>
+</body>
+</html>
