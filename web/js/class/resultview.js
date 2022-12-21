@@ -18,10 +18,10 @@ class ResultView {
 
     this.turnTest.on('icecandidate', (candidate) => {
       let template = `<div class="col-12"><div class="row">
-        <div class="col-2">${candidate.type}</div>
-        <div class="col-2">${candidate.protocol}</div>
-        <div class="col-4">${candidate.ip}:${candidate.port}</div>
-        <div class="col-4">${ candidate.relatedAddress ? candidate.relatedAddress +':' + candidate.relatedPort : 'N/A'}</div>
+        <div class="col-1">${candidate.type}</div>
+        <div class="col-1">${candidate.protocol}</div>
+        <div class="col-5 px-3">${candidate.address}:${candidate.port}</div>
+        <div class="col-5 px-3">${candidate.relatedAddress ? candidate.relatedAddress + ':' + candidate.relatedPort : 'N/A'}</div>
       </div></div>`
 
       let e = document.createElement('div')
